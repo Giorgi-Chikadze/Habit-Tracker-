@@ -27,9 +27,12 @@ class HabitLog(models.Model):
 
 
 class Streak(models.Model):
-    habit = models.ForeignKey('Habit', related_name='streaks', on_delete=models.CASCADE)
+    habit = models.ForeignKey('Habit', related_name='streak', on_delete=models.CASCADE)
     current_streak = models.IntegerField()
     longest_streak = models.IntegerField()
-    last_completed_date = models.DateField()
+    last_completed_date = models.DateField(null=True, blank=True)
+
+
+
 
 
