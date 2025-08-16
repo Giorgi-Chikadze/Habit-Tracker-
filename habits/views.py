@@ -24,7 +24,10 @@ class HabitLogViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return self.queryset.filter(habit__user=self.request.user)
+        user = getattr(self.request, "user", None)
+        if not user or not user.is_authenticated:
+            return self.queryset.none()  
+        return self.queryset.filter(habit__user=user)
 
 
 

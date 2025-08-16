@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'habits',
     'users',
-    'rest_framework'
+    'rest_framework',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,23 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
+
+
+SWAGGER_SETTINGS = {
+    'USE_SESSSION_AUTH':False,
+    'SECURITY_DEFINITIONS': {
+        'Bearer':{
+            'type':'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': "შეიყვანეთ JWT ტოკენი: Bearer <ტოკენი>",
+        }
+    },
+}
